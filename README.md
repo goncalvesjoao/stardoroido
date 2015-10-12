@@ -3,7 +3,7 @@ StarWars droids React Component created with [React-to-commonJS](https://github.
 
 ![boilerplate_structure](https://raw.github.com/goncalvesjoao/stardoroido/master/readme/preview.png)
 
-This React Component was built, tested and documented with the help of [React-to-commonJS](https://github.com/goncalvesjoao/react-to-commonjs), check it out if you want to create a React Component without the pain of gathering all the necessary developing tools, building your own documentation page (like [this one](http://goncalvesjoao.github.io/stardoroido/)) and or mock servers for testing/developing purposes.
+This React Component was built, tested and documented with the help of [React-to-commonJS](https://github.com/goncalvesjoao/react-to-commonjs), check it out if you want to create a React Component without the pain of gathering all the necessary developing tools, building your own documentation page ([like this one](http://goncalvesjoao.github.io/stardoroido/)) and or mock servers for testing/developing purposes.
 
 ## Getting started
 ```
@@ -45,6 +45,6 @@ The existing test spec is both an example of how you can test your React Compone
 
 Also, this project was created using the --css_modules option:
 ```
-r2c2 new stardoroido --css_modules
+$> r2c2 new stardoroido --css_modules
 ```
 which means that this project uses  [react-css-modules](https://github.com/gajus/react-css-modules), the spec example is also prepared for this and mocks the react-css-modules lib, so that mocha doesn't launch an error while loading css files.
