@@ -26,14 +26,50 @@ class Home extends React.Component {
         </div>
 
         <div className="container">
-          <h2>Getting started:</h2>
-          <Prism className="language-ruby" noShadow={ true } bashMode={ true }>
-            npm install { config.name } --save
-          </Prism>
-          <p>or</p>
+          <p className="lead">
+            This React Component was built, tested and documented with the help of <a href="https://github.com/goncalvesjoao/react-to-commonjs" target="_blank">React-to-commonJS</a>.
+            <br/>
+            Check it out if you want to create a React Component without the pain of gathering all the necessary developing tools, building your own documentation page (like this one) and or mock servers for testing/developing purposes.
+          </p>
+        </div>
+
+        <div className="container">
+          <h2>Getting started</h2>
           <Prism className="language-ruby" noShadow={ true } bashMode={ true }>
               npm install git+https://git@github.com:{ config.author || '<package.json:author>' }/{ config.name || '<package.json:name>' }.git#master --save
           </Prism>
+          <p>You can now require <b>stardoroido</b> on your React project like a normal node module.</p>
+        </div>
+
+        <div className="container">
+          <h2>Usage</h2>
+          <Prism className="language-jsx" noShadow={ true }>
+            {
+              `const React = require('react');
+const Stardoroido = require('stardoroido');
+const { Droids } = Stardoroido.components;
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Hello world!</h1>
+        <Droids />
+      </div>
+    );
+  }
+}`
+            }
+          </Prism>
+        </div>
+
+        <div className="container">
+          <h2>Notes</h2>
+          <h4>This tool was built using:</h4>
+          <ul>
+            <li>node 4.1.0</li>
+            <li>npm 3.3.3</li>
+          </ul>
         </div>
       </div>
     );

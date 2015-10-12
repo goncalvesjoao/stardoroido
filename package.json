@@ -1,7 +1,7 @@
 {
   "name": "stardoroido",
   "version": "1.0.0",
-  "description": "my commonJS react component",
+  "description": "StarWars droids React Component created with react-to-commonjs",
   "author": "goncalvesjoao",
   "repository": {
     "type": "git",
