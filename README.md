@@ -35,16 +35,16 @@ class App extends React.Component {
 ## Notes
 (this tool was built using: node v4.1.0 and npm v3.3.3)
 
-In truth this React Component is actually the one that comes built-in with react-to-commonjs when it creates a new project.
+- In truth this React Component is actually the one that comes built-in with react-to-commonjs when it creates a new project.
 
-Why does react-to-commonjs create a template project you ask? Because the documentation page would be blank and you wouldn't get to see how to connect your component to the documentation page.
+  Why does react-to-commonjs create a template project you ask? Because the documentation page would be blank and you wouldn't get to see how to connect your component to the documentation page.
 
-This simple project makes an ajax call to fetch the droids data and for that it makes use of mock servers. This way front-end development doesn't have to wait for back-end development.
+- This simple project makes an ajax call to fetch the droids data and for that it makes use of mock servers. This way front-end development doesn't have to wait for back-end development.
 
-The existing test spec is both an example of how you can test your React Component and how you can setup your spec to prevent a remote ajax call.
+- The existing test spec is both an example of how you can test your React Component and how you can setup your spec to prevent a remote ajax call.
 
-Also, this project was created using the --css_modules option:
-```
-$> r2c2 new stardoroido --css_modules
-```
-which means that this project uses  [react-css-modules](https://github.com/gajus/react-css-modules), the spec example is also prepared for this and mocks the react-css-modules lib, so that mocha doesn't launch an error while loading css files.
+- Also, this project was created using the --css_modules option:
+  ```
+  $> r2c2 new stardoroido --css_modules
+  ```
+  which means that this project uses  [react-css-modules](https://github.com/gajus/react-css-modules), the spec example is also prepared for this and mocks the react-css-modules lib, so that mocha doesn't launch an error while loading css files.

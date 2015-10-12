@@ -18,7 +18,13 @@ class Home extends React.Component {
               </div>
               <div className="col-md-5 jumbotron-side text-center">
                 <p>&nbsp;</p>
-                <p>{ this.repositoryLink() }</p>
+                <a
+                  href={ config.repository.url + '/releases' }
+                  className="btn btn-success btn-lg"
+                  target="_blank"
+                >
+                  <i className="glyphicon glyphicon-download-alt"></i> Download
+                </a>
                 <p><strong>Version</strong> { config.version }</p>
               </div>
             </div>
@@ -65,39 +71,32 @@ class App extends React.Component {
 
         <div className="container">
           <h2>Notes</h2>
-          <h4>This tool was built using:</h4>
+
+          <p>(this tool was built using: node v4.1.0 and npm v3.3.3)</p>
+
           <ul>
-            <li>node 4.1.0</li>
-            <li>npm 3.3.3</li>
+            <li>
+              <p>In truth this React Component is actually the one that comes built-in with react-to-commonjs when it creates a new project.</p>
+              <p>Why does react-to-commonjs create a template project you ask? Because the documentation page would be blank and you wouldn't get to see how to connect your component to the documentation page.</p>
+            </li>
+            <li>
+              <p>This simple project makes an ajax call to fetch the droids data and for that it makes use of mock servers. This way front-end development doesn't have to wait for back-end development.</p>
+            </li>
+            <li>
+              <p>The existing test spec is both an example of how you can test your React Component and how you can setup your spec to prevent a remote ajax call.</p>
+            </li>
+            <li>
+              <p>Also, this project was created using the --css_modules option:</p>
+              <Prism className="language-ruby" noShadow={ true } bashMode={ true }>
+                { `r2c2 new stardoroido --css_modules` }
+              </Prism>
+
+              <p>which means that this project uses <a href="https://github.com/gajus/react-css-modules" target="_blank">react-css-modules</a>, the spec example is also prepared for this and mocks the react-css-modules lib, so that mocha doesn't launch an error while loading css files.</p>
+            </li>
           </ul>
+          <p>&nbsp;</p>
         </div>
       </div>
-    );
-  }
-
-  repositoryLink() {
-    const props = { href: '' };
-
-    if (config.repository) { props.href = config.repository.url; }
-
-    if (props.href) {
-      props.href += '/releases';
-      props.target = '_blank';
-    } else {
-      props.href = '#';
-      props.onClick = (event) => {
-        event.preventDefault();
-
-        /*eslint-disable */
-        alert('You might want to fill in the blanks of your repository details listed on the package.json');
-        /*eslint-enable */
-      };
-    }
-
-    return (
-      <a { ...props } className="btn btn-success btn-lg">
-        <i className="glyphicon glyphicon-download-alt"></i> Download
-      </a>
     );
   }
 
