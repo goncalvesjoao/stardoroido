@@ -1,4 +1,5 @@
 var fs = require('fs');
+var del = require('del');
 var gulp = require('gulp');
 var srcDir = './';
 var configDir = './config/';
@@ -7,8 +8,10 @@ var browserSync = require('browser-sync').create();
 var environment = 'development';
 var distDir = './tmp' + application.appConfig[environment].baseHref;
 
-gulp.task('build', build);
+gulp.task('build-docs', ['clean:docs'], build);
 gulp.task('server', launchServer);
+gulp.task('clean:tmp', function() { return del(['./tmp/**/*']); });
+gulp.task('clean:docs', function() { return del(['../docs/**/*'], { force:  true }); });
 gulp.task('copy-public', copyPublic);
 gulp.task('compile-css', compileCss);
 gulp.task('compile-html', compileHtml);
@@ -19,7 +22,8 @@ gulp.task('watch', function() {
   gulp.watch([srcDir + 'public/**/*', '!' + srcDir + 'public/**/*.html'], copyPublic);
 });
 
-var defaultTasks = ['copy-public', 'compile-html', 'compile-css', 'server', 'watch'];
+
+var defaultTasks = ['clean:tmp', 'copy-public', 'compile-html', 'compile-css', 'server', 'watch'];
 if (fs.existsSync('./mockServers')) { defaultTasks.push('mock-servers'); }
 gulp.task('default', defaultTasks);
 
@@ -41,13 +45,22 @@ function build() {
 
 function compileCss() {
   var sass = require('gulp-sass');
-  var cssimport = require("gulp-cssimport");
+  var importOnce = require('node-sass-import-once');
 
   gulp.src(srcDir + 'css/index.scss')
-      .pipe(cssimport({ matchPattern: "*.css" }))
-      .pipe(sass({ sync: true, onError: console.error }))
+      .pipe(sass({
+        sync: true,
+        importer: importOnce,
+        importOnce: {
+          index: false,
+          css: true,
+          bower: false
+        },
+        includePaths: [srcDir + 'css', '../node_modules'],
+        onError: console.error
+      }))
       .pipe(updateBrowser())
-      .pipe(gulp.dest(distDir + 'css/index.css'));
+      .pipe(gulp.dest(distDir + 'css'));
 }
 
 function compileHtml() {
@@ -109,27 +122,11 @@ function launchServer() {
 }
 
 function launchMockServers() {
-  var mockServers = require('./mockServers');
-
-  mockServers.forEach(function(mockServer) {
-    var app         = require('express')(),
-        cors        = require('cors'),
-        bodyParser  = require('body-parser'),
-        whitelist   = ['http://localhost:' + application.serverPort],
-        options     = {
-          origin: function(origin, callback) {
-            callback(null, (whitelist.indexOf(origin) !== -1));
-          }
-        };
-
-    app.use(cors(options));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-
-    mockServer.server(app);
-
-    app.listen(mockServer.port);
-  });
+  require('mocking-birds')(
+    './mockServers',
+    application.mockServerPort,
+    ['http://localhost:' + application.serverPort]
+  );
 }
 
 function updateBrowser() {

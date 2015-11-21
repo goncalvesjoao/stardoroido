@@ -1,4 +1,5 @@
-const { Droids } = Stardoroido.components;
+import Droid from '../../src/components/Droids/Droid';
+import Droids from '../../src/components/Droids';
 const mockedDroids = [
   { id: 1, name: 'r2d2', avatar: 'none' },
   { id: 2, name: 'c-3po', avatar: 'none' },
@@ -14,27 +15,25 @@ describe('Droids', () => {
 
   context('when no props are used', () => {
     it('a list of droids with names should be returned', () => {
-      const droids = TestUtils.renderIntoDocument(<Droids />);
+      const $droids = $(<Droids />).render();
 
-      expect(Object.keys(droids.refs).length).to.equal(2);
+      expect($droids.find(Droid).length).to.equal(2);
 
-      for (const index in droids.refs) {
-        const droid = droids.refs[index];
-        expect(droid.refs.name).to.exist;
-      }
+      $droids.find(Droid).each((node, index, collection) => {
+        expect($(node).find('[name="droid-name"]').text()).to.not.equal('');
+      })
     });
   });
 
   context('when props.name = false', () => {
     it('a list of droids without names should be returned', () => {
-      const droids = TestUtils.renderIntoDocument(<Droids name={ false } />);
+      const $droids = $(<Droids name={ false } />).render();
 
-      expect(Object.keys(droids.refs).length).to.equal(2);
+      expect($droids.find(Droid).length).to.equal(2);
 
-      for (const index in droids.refs) {
-        const droid = droids.refs[index];
-        expect(droid.refs.name).to.not.exist;
-      }
+      $droids.find(Droid).each((node, index, collection) => {
+        expect($(node).find('[name="droid-name"]').text()).to.equal('');
+      })
     });
   });
 });

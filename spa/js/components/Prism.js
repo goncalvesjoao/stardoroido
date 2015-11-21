@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Prism extends React.Component {
 
   hightlight() { window.Prism.highlightElement(this.refs.code); }
@@ -7,7 +9,7 @@ class Prism extends React.Component {
   componentDidUpdate() { this.hightlight(); }
 
   render() {
-    let preClassName = 'line-numbers'
+    let preClassName = 'line-numbers';
 
     if (this.props.noShadow) { preClassName += ' no-shadow'; }
 
@@ -22,4 +24,4 @@ class Prism extends React.Component {
 
 }
 
-module.exports = Prism;
+export default Prism;

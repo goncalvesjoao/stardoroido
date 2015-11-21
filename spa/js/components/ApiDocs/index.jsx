@@ -1,17 +1,17 @@
-const { Droids } = Stardoroido.components;
-const { Label } = require('react-bootstrap');
-const Prism = require('../../Prism');
+import React from 'react';
+import Prism from '../Prism';
+import LiLink from '../LiLink';
+import Droids from '../../../../src';
+import { Label } from 'react-bootstrap';
+import { IndexLink } from 'react-router';
 
-class DroidsExample extends React.Component {
+class ApiDocs extends React.Component {
 
-  render() {
+  renderHome() {
     return (
       <div>
         <Prism className="language-jsx">
-          {
-            `const Stardoroido = require('stardoroido');
-const { Droids } = Stardoroido.components;`
-          }
+          { `import Droids from 'stardoroido';` }
         </Prism>
 
         <p>&nbsp;</p>
@@ -54,6 +54,39 @@ const { Droids } = Stardoroido.components;`
     );
   }
 
+  renderSidebar() {
+    return (
+      <ul className="ascii fixed">
+        <li>
+          <IndexLink activeClassName="active" to="/api_docs">Stardoroido</IndexLink>
+          <ul>
+            <LiLink to="/api_docs/set_config">setConfig</LiLink>
+          </ul>
+        </li>
+      </ul>
+    );
+  }
+
+  render() {
+    return (
+      <div id="top">
+        <p>&nbsp;</p>
+
+        <div className="container">
+          <div className="row">
+            <div className="col-xs-3 ascii">
+              { this.renderSidebar() }
+            </div>
+
+            <div className="col-md-9">
+              { this.props.children || this.renderHome() }
+            </div>
+          </div>
+        </div>
+
+      </div>
+    );
+  }
 }
 
-module.exports = DroidsExample;
+export default ApiDocs;

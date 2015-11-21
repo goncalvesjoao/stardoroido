@@ -12,10 +12,12 @@ module.exports = {
     baseHref: '/',
   }),
 
-  eslint: false,
+  eslint: true,
 
   serverPort: 9000,
 
-  vendorDependencies: Object.keys(stardoroidoPackageJson.dependencies),
+  mockServerPort: 9090,
+
+  vendorDependencies: Object.keys(stardoroidoPackageJson.dependencies || {}),
 
 };

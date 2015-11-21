@@ -1,15 +1,26 @@
-require('./jsdomBuilder')('<!doctype html><html><body></body></html>');
+import './jsdom';
 
-require('./dependencies');
+import $ from 'teaspoon';
+import chai from 'chai';
+import React from 'react';
+import sinon from 'sinon';
+import mockery from 'mockery';
+import sinonChai from 'sinon-chai';
+import TestUtils from 'react-addons-test-utils';
+import { findDOMNode } from 'react-dom';
 
-mockery.enable({
-  warnOnReplace: false,
-  warnOnUnregistered: false,
-  useCleanCache: true,
-});
+chai.use(sinonChai);
 
-mockery.registerMock('react-css-modules', function fakeCSSModules(Component) {
-  return Component;
-});
+function renderStateless(Component, props) {
+  const wrapper = TestUtils.renderIntoDocument(<div><Component { ...props } /></div>);
 
-global.Stardoroido = require('../../src');
+  return findDOMNode(wrapper).children[0];
+}
+
+global.$ = $;
+global.React = React;
+global.sinon = sinon;
+global.expect = chai.expect;
+global.mockery = mockery;
+global.TestUtils = TestUtils;
+global.renderStateless = renderStateless;

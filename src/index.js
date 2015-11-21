@@ -1,7 +1,10 @@
-const jQuery = require('jquery');
+import config from './config';
+import Droids from './components/Droids';
 
-module.exports = {
-  config: require('./config'),
+export function setConfig(newConfig) {
+  Object.assign(config, newConfig);
+}
 
-  components: require('./components'),
-};
+export { config as config };
+
+export default Droids;

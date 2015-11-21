@@ -1,6 +1,6 @@
-const { config } = Stardoroido;
-const { Panel } = require('react-bootstrap');
-const Prism = require('./Prism');
+import React from 'react';
+import Prism from './Prism';
+import { config } from '../../../src';
 
 class Home extends React.Component {
 
@@ -16,15 +16,10 @@ class Home extends React.Component {
                   { config.description }
                 </p>
               </div>
+
               <div className="col-md-5 jumbotron-side text-center">
                 <p>&nbsp;</p>
-                <a
-                  href={ config.repository.url + '/releases' }
-                  className="btn btn-success btn-lg"
-                  target="_blank"
-                >
-                  <i className="glyphicon glyphicon-download-alt"></i> Download
-                </a>
+                <p>{ this.repositoryLink() }</p>
                 <p><strong>Version</strong> { config.version }</p>
               </div>
             </div>
@@ -33,7 +28,7 @@ class Home extends React.Component {
 
         <div className="container">
           <p className="lead">
-            This React Component was built, tested and documented with the help of <a href="https://github.com/goncalvesjoao/react-to-commonjs" target="_blank">React-to-commonJS</a>.
+            This React Module was built, tested and documented with the help of <a href="https://github.com/goncalvesjoao/react-to-commonjs" target="_blank">React-to-commonJS</a>.
             <br/>
             Check it out if you want to create a React Component without the pain of gathering all the necessary developing tools, building your own documentation page (like this one) and or mock servers for testing/developing purposes.
           </p>
@@ -72,11 +67,9 @@ class App extends React.Component {
         <div className="container">
           <h2>Notes</h2>
 
-          <p>(this tool was built using: node v4.1.0 and npm v3.3.3)</p>
-
           <ul>
             <li>
-              <p>In truth this React Component is actually the one that comes built-in with react-to-commonjs when it creates a new project.</p>
+              <p>In truth this React Module is actually the one that comes built-in with react-to-commonjs when it creates a new project.</p>
               <p>Why does react-to-commonjs create a template project you ask? Because the documentation page would be blank and you wouldn't get to see how to connect your component to the documentation page.</p>
             </li>
             <li>
@@ -100,6 +93,32 @@ class App extends React.Component {
     );
   }
 
+  repositoryLink() {
+    const props = { href: '' };
+
+    if (config.repository) { props.href = config.repository.url; }
+
+    if (props.href) {
+      props.href += '/releases';
+      props.target = '_blank';
+    } else {
+      props.href = '#';
+      props.onClick = (event) => {
+        event.preventDefault();
+
+        /*eslint-disable */
+        alert('You might want to fill in the blanks of your repository details listed on the package.json');
+        /*eslint-enable */
+      };
+    }
+
+    return (
+      <a { ...props } className="btn btn-success btn-lg">
+        <i className="glyphicon glyphicon-download-alt"></i> Download
+      </a>
+    );
+  }
+
 }
 
-module.exports = Home;
+export default Home;

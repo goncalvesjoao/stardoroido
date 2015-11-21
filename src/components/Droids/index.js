@@ -1,6 +1,7 @@
-const jQuery = require('jquery');
-const config = require('../../config');
-const Droid = require('./Droid');
+import React from 'react';
+import Droid from './Droid';
+import jQuery from 'jquery';
+import config from '../../config';
 
 class Droids extends React.Component {
 
@@ -17,6 +18,16 @@ class Droids extends React.Component {
     });
   }
 
+  renderDroids() {
+    if (!this.state.droids.length) {
+      return <li><h2>These are not the droids you are looking for</h2></li>;
+    }
+
+    return this.state.droids.map((droid, index) => {
+      return <Droid key={ index } droid={ droid } { ...this.props } />;
+    });
+  }
+
   render() {
     return (
       <ul className="list-inline">
@@ -25,16 +36,6 @@ class Droids extends React.Component {
     );
   }
 
-  renderDroids() {
-    if (!this.state.droids.length) {
-      return <li><h2>These are not the droids you are looking for</h2></li>;
-    }
-
-    return this.state.droids.map((droid, index) => {
-      return <Droid key={ index } ref={ `droid_${droid.id}` } droid={ droid } { ...this.props } />;
-    });
-  }
-
 }
 
-module.exports = Droids;
+export default Droids;

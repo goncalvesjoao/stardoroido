@@ -1,14 +1,31 @@
-"use strict";
+'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var CSSModules = require('react-css-modules');
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _stylesStyleCss = require('../../styles/style.css');
+
+var _stylesStyleCss2 = _interopRequireDefault(_stylesStyleCss);
+
+var _reactCssModules = require('react-css-modules');
+
+var _reactCssModules2 = _interopRequireDefault(_reactCssModules);
+
 var defaultProps = {
   name: true
 };
@@ -17,52 +34,54 @@ var Droid = (function (_React$Component) {
   _inherits(Droid, _React$Component);
 
   function Droid() {
-    _classCallCheck(this, Droid);
+    _classCallCheck(this, _Droid);
 
-    _get(Object.getPrototypeOf(Droid.prototype), "constructor", this).apply(this, arguments);
+    _get(Object.getPrototypeOf(_Droid.prototype), 'constructor', this).apply(this, arguments);
   }
 
   _createClass(Droid, [{
-    key: "render",
-    value: function render() {
-      return React.createElement(
-        "li",
-        null,
-        React.createElement("img", {
-          ref: "avatar",
-          className: "img-circle",
-          styleName: "avatar",
-          src: this.props.droid.avatar
-        }),
-        React.createElement(
-          "span",
-          null,
-          this.renderName()
-        )
-      );
-    }
-  }, {
-    key: "renderName",
+    key: 'renderName',
     value: function renderName() {
       if (!this.props.name) {
         return null;
       }
 
-      return React.createElement(
-        "p",
-        { className: "text-center" },
-        React.createElement(
-          "span",
-          { ref: "name", className: "label label-info" },
+      return _react2['default'].createElement(
+        'p',
+        { className: 'text-center' },
+        _react2['default'].createElement(
+          'span',
+          { name: 'droid-name', className: 'label label-info' },
           this.props.droid.name
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'li',
+        null,
+        _react2['default'].createElement('img', {
+          className: 'img-circle',
+          styleName: 'avatar',
+          src: this.props.droid.avatar
+        }),
+        _react2['default'].createElement(
+          'span',
+          null,
+          this.renderName()
         )
       );
     }
   }]);
 
+  var _Droid = Droid;
+  Droid = (0, _reactCssModules2['default'])(_stylesStyleCss2['default'])(Droid) || Droid;
   return Droid;
-})(React.Component);
+})(_react2['default'].Component);
 
 Droid.defaultProps = defaultProps;
 
-module.exports = CSSModules(Droid, require('../../styles/style.css'));
+exports['default'] = Droid;
+module.exports = exports['default'];

@@ -4,4 +4,4 @@ const NotFound = () => (
   </div>
 );
 
-module.exports = NotFound;
+export default NotFound;
